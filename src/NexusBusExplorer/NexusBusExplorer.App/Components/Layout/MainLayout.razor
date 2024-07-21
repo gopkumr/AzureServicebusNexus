@@ -1,17 +1,46 @@
-﻿@inherits LayoutComponentBase
+﻿@using System.Text.Json
+@using Microsoft.JSInterop
 
-<div class="page">
-    <div class="sidebar">
+@inject IDialogService DialogService
+@inject IJSRuntime JSRuntime
+@inherits LayoutComponentBase
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudText Typo="Typo.h5" Class="ml-3">Nexus Bus Explorer</MudText>
+        <MudSpacer />
+        <MudMenu Icon="@Icons.Material.Filled.Settings"
+                 AriaLabel="Connection"
+                 AnchorOrigin="@Origin.CenterLeft" 
+                 TransformOrigin="@Origin.CenterRight">
+            <MudMenuItem @onclick="OpenDialogAsync">Connect to servicebus</MudMenuItem>
+        </MudMenu>
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Docked" Elevation="2">
         <NavMenu />
-    </div>
+    </MudDrawer>
+    <MudMainContent>
+        @*Body*@
+    </MudMainContent>
+</MudLayout>
+@code {
+    bool _drawerOpen = true;
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+    private Task OpenDialogAsync()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+
+        return DialogService.ShowAsync<NexusBusExplorer.App.Components.Dialogs.Connection>("Connect to service bus", options);
+    }
+}

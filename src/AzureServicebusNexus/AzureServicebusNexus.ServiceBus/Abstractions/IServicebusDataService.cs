@@ -1,28 +1,28 @@
-﻿using AzureServicebusNexus.Domain.Models;
+﻿using NexusBusExplorer.Domain.Models;
 
-namespace AzureServicebusNexus.ServiceBus.Abstractions
+namespace NexusBusExplorer.ServiceBus.Abstractions
 {
     public interface IServicebusDataService
     {
-        ActionResponse<IEnumerable<NexusServicebusMessage>> ReadMessages(string topic, string subscriptionName);
+        ActionResponse<IEnumerable<NexusBusMessage>> ReadMessages(string topic, string subscriptionName);
 
-        ActionResponse<IEnumerable<NexusServicebusMessage>> ReadQueueMessages(string queueName);
+        ActionResponse<IEnumerable<NexusBusMessage>> ReadQueueMessages(string queueName);
 
-        ActionResponse<IEnumerable<NexusServicebusMessage>> PeekMessages(string topic, string subscriptionName);
+        ActionResponse<IEnumerable<NexusBusMessage>> PeekMessages(string topic, string subscriptionName);
 
-        ActionResponse<IEnumerable<NexusServicebusMessage>> PeekQueueMessages(string queueName);
+        ActionResponse<IEnumerable<NexusBusMessage>> PeekQueueMessages(string queueName);
 
-        ActionResponse<string> SendMessageToTopic(string topic, NexusServicebusMessage message);
+        ActionResponse<string> SendMessageToTopic(string topic, NexusBusMessage message);
 
-        ActionResponse<string> SendMessageToQueue(string queueName, NexusServicebusMessage message);
+        ActionResponse<string> SendMessageToQueue(string queueName, NexusBusMessage message);
 
-        ActionResponse<string> CompleteMessageFromTopic(string topic, NexusServicebusMessage message);
+        ActionResponse<string> CompleteMessageFromTopic(string topic, NexusBusMessage message);
 
-        ActionResponse<string> CompleteMessageFromQueue(string queueName, NexusServicebusMessage message);
+        ActionResponse<string> CompleteMessageFromQueue(string queueName, NexusBusMessage message);
 
-        ActionResponse<string> ResendMessageToTopic(string topic, NexusServicebusMessage message);
+        ActionResponse<string> ResendMessageToTopic(string topic, NexusBusMessage message);
 
-        ActionResponse<string> ResendMessageToQueue(string queueName, NexusServicebusMessage message);
+        ActionResponse<string> ResendMessageToQueue(string queueName, NexusBusMessage message);
 
     }
 }

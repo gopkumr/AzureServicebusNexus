@@ -1,11 +1,6 @@
-﻿using AzureServicebusNexus.ServiceBus.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NexusBusExplorer.ServiceBus.Abstractions;
 
-namespace AzureServicebusNexus.ServiceBus.Implementations
+namespace NexusBusExplorer.ServiceBus.Implementations
 {
     public class ServicebusAdminService : IServicebusAdminService
     {

@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\AzureServicebusNexus.Domain\AzureServicebusNexus.Domain.csproj" />
+	  <ProjectReference Include="..\AzureServicebusNexus.Domain\NexusBusExplorer.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

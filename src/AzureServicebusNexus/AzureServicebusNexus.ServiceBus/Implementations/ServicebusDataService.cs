@@ -1,56 +1,56 @@
-﻿using AzureServicebusNexus.Domain.Models;
-using AzureServicebusNexus.ServiceBus.Abstractions;
+﻿using NexusBusExplorer.Domain.Models;
+using NexusBusExplorer.ServiceBus.Abstractions;
 
-namespace AzureServicebusNexus.ServiceBus.Implementations
+namespace NexusBusExplorer.ServiceBus.Implementations
 {
     public class ServicebusDataService : IServicebusDataService
     {
-        public ActionResponse<string> CompleteMessageFromQueue(string queueName, NexusServicebusMessage message)
+        public ActionResponse<string> CompleteMessageFromQueue(string queueName, NexusBusMessage message)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<string> CompleteMessageFromTopic(string topic, NexusServicebusMessage message)
+        public ActionResponse<string> CompleteMessageFromTopic(string topic, NexusBusMessage message)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<IEnumerable<NexusServicebusMessage>> PeekMessages(string topic, string subscriptionName)
+        public ActionResponse<IEnumerable<NexusBusMessage>> PeekMessages(string topic, string subscriptionName)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<IEnumerable<NexusServicebusMessage>> PeekQueueMessages(string queueName)
+        public ActionResponse<IEnumerable<NexusBusMessage>> PeekQueueMessages(string queueName)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<IEnumerable<NexusServicebusMessage>> ReadMessages(string topic, string subscriptionName)
+        public ActionResponse<IEnumerable<NexusBusMessage>> ReadMessages(string topic, string subscriptionName)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<IEnumerable<NexusServicebusMessage>> ReadQueueMessages(string queueName)
+        public ActionResponse<IEnumerable<NexusBusMessage>> ReadQueueMessages(string queueName)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<string> ResendMessageToQueue(string queueName, NexusServicebusMessage message)
+        public ActionResponse<string> ResendMessageToQueue(string queueName, NexusBusMessage message)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<string> ResendMessageToTopic(string topic, NexusServicebusMessage message)
+        public ActionResponse<string> ResendMessageToTopic(string topic, NexusBusMessage message)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<string> SendMessageToQueue(string queueName, NexusServicebusMessage message)
+        public ActionResponse<string> SendMessageToQueue(string queueName, NexusBusMessage message)
         {
             throw new NotImplementedException();
         }
 
-        public ActionResponse<string> SendMessageToTopic(string topic, NexusServicebusMessage message)
+        public ActionResponse<string> SendMessageToTopic(string topic, NexusBusMessage message)
         {
             throw new NotImplementedException();
         }

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServicebusNexus.Domain", "AzureServicebusNexus.Domain\AzureServicebusNexus.Domain.csproj", "{0AEF752C-1F06-4EE2-BA80-7723CA93D757}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NexusBusExplorer.Domain", "AzureServicebusNexus.Domain\NexusBusExplorer.Domain.csproj", "{0AEF752C-1F06-4EE2-BA80-7723CA93D757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServicebusNexus.ServiceBus", "AzureServicebusNexus.ServiceBus\AzureServicebusNexus.ServiceBus.csproj", "{3ACA37B3-5ACE-4A03-B1B1-8170D72C87D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NexusBusExplorer.ServiceBus", "AzureServicebusNexus.ServiceBus\NexusBusExplorer.ServiceBus.csproj", "{3ACA37B3-5ACE-4A03-B1B1-8170D72C87D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureServicebusNexus.App", "AzureServicebusNexus.Win\AzureServicebusNexus.App.csproj", "{A4F74F75-F8BB-4E2A-9050-394175860F0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NexusBusExplorer.App", "AzureServicebusNexus.Win\NexusBusExplorer.App.csproj", "{A4F74F75-F8BB-4E2A-9050-394175860F0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

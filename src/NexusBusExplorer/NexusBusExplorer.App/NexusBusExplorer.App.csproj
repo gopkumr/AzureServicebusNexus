@@ -66,8 +66,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\NexusBusExplorer.AzureServiceBus\NexusBusExplorer.AzureServiceBus.csproj" />
       <ProjectReference Include="..\NexusBusExplorer.Domain\NexusBusExplorer.Domain.csproj" />
-      <ProjectReference Include="..\NexusBusExplorer.ServiceBus\NexusBusExplorer.ServiceBus.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using NexusBusExplorer.Domain.Models;
 
-namespace NexusBusExplorer.ServiceBus.Abstractions
+namespace NexusBusExplorer.Domain.Services.Abstractions
 {
     public interface IServicebusDataService
     {

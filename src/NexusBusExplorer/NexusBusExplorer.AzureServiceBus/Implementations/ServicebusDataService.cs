@@ -1,7 +1,7 @@
 ﻿using NexusBusExplorer.Domain.Models;
-using NexusBusExplorer.ServiceBus.Abstractions;
+using NexusBusExplorer.Domain.Services.Abstractions;
 
-namespace NexusBusExplorer.ServiceBus.Implementations
+namespace NexusBusExplorer.AzureServiceBus.Implementations
 {
     public class ServicebusDataService : IServicebusDataService
     {

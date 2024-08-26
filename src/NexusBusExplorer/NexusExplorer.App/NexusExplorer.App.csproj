@@ -70,4 +70,8 @@
       <ProjectReference Include="..\NexusExplorer.Domain\NexusExplorer.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Components\Widgets\" />
+    </ItemGroup>
+
 </Project>

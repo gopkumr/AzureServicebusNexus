@@ -10,5 +10,6 @@ namespace NexusExplorer.App.Services
     internal class NexusExplorerEvents : INexusExplorerEvents
     {
         public GlobalEvent? OnServicebusConnected { get; set; }
+        public GlobalEvent? OnWaiting { get; set; }
     }
 }

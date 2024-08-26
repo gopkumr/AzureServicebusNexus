@@ -34,7 +34,7 @@
 
     private void OnServicebusConnected(NexusExplorerEventArgs args)
     {
-        var servicebusNode = new TreeItemData<string> { Value = $"namespace-{args.Value}", Text = args.Value, Icon = Icons.Material.Filled.Link, Expandable = true };
+        var servicebusNode = new TreeItemData<string> { Value = $"namespace-{args.Value}", Text = args.Value, Icon = Icons.Material.Filled.CloudQueue, Expandable = true };
         _open = true;
         InitialTreeItems.Add(servicebusNode);
         StateHasChanged();
@@ -42,19 +42,30 @@
 
     public async Task<IReadOnlyCollection<TreeItemData<string>>> LoadServerData(string parentValue)
     {
+        globalEventHandler.OnWaiting?.Invoke(new NexusExplorerEventArgs { Value = "inprogress", Sender = "TreeView" });
+
         var children = new List<TreeItemData<string>>();
         if (parentValue.StartsWith("namespace"))
         {
+            children.Add(new TreeItemData<string> { Value = $"queues", Text = "Queues", Icon = Icons.Material.Filled.Topic, Expandable = true });
+            children.Add(new TreeItemData<string> { Value = $"topics", Text = "Topics", Icon = Icons.Material.Filled.Topic, Expandable = true });
+            return children;
+        }
+        else if (parentValue.Equals("queues"))
+        {
             var queues = servicebusAdminService.GetQueues();
-            var topics = servicebusAdminService.GetTopics();
             foreach (var queue in queues.Content)
             {
-                children.Add(new TreeItemData<string> { Value = $"queue-{queue.Name}", Text = queue.Name, Icon = Icons.Material.Filled.Queue, Expandable = false });
+                children.Add(new TreeItemData<string> { Value = $"queue-{queue.Name}", Text = queue.Name, Icon = Icons.Material.Filled.Mail, Expandable = false });
             }
-
+            return children;
+        }
+        else if (parentValue.Equals("topics"))
+        {
+            var topics = servicebusAdminService.GetTopics();
             foreach (var topic in topics.Content)
             {
-                children.Add(new TreeItemData<string> { Value = $"topic-{topic.Name}", Text = topic.Name, Icon = Icons.Material.Filled.Topic, Expandable = true });
+                children.Add(new TreeItemData<string> { Value = $"topic-{topic.Name}", Text = topic.Name, Icon = Icons.Material.Filled.Mail, Expandable = true });
             }
             return children;
         }
@@ -64,9 +75,11 @@
             var subscriptions = servicebusAdminService.GetTopicSubscriptions(topicName);
             foreach (var subscription in subscriptions.Content)
             {
-                children.Add(new TreeItemData<string> { Value = $"subscription-{subscription.Name}", Text = subscription.Name, Icon = Icons.Material.Filled.Subscriptions, Expandable = false });
+                children.Add(new TreeItemData<string> { Value = $"subscription-{subscription.Name}", Text = subscription.Name, Icon = Icons.Material.Filled.Archive, Expandable = false });
             }
         }
+
+        globalEventHandler.OnWaiting?.Invoke(new NexusExplorerEventArgs { Value = "stopped", Sender = "TreeView" });
         return children;
     }
 }

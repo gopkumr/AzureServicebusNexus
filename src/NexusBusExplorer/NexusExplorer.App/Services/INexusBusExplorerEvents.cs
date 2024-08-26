@@ -14,6 +14,7 @@ namespace NexusExplorer.App.Services
     {
         GlobalEvent? OnServicebusConnected { get; set; } 
 
+        GlobalEvent? OnWaiting { get; set; }
 
     }
 }

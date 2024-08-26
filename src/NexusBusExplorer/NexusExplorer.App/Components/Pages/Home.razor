@@ -1,0 +1,72 @@
+﻿@page "/"
+@using NexusExplorer.App.ViewModels
+@using NexusExplorer.Domain.Services.Abstractions
+@using NexusExplorer.App.Services;
+
+@inject IServicebusAdminService servicebusAdminService
+@inject INexusExplorerEvents globalEventHandler
+
+
+<MudDrawer @bind-Open="@_open" Elevation="0" Variant="@DrawerVariant.Persistent" ClipMode="@DrawerClipMode.Docked">
+    <MudTreeView ServerData="@LoadServerData" Items="@InitialTreeItems">
+        <ItemTemplate>
+            <MudTreeViewItem Text="@context.Text" Value="@context.Value" Icon="@context.Icon" LoadingIconColor="Color.Info" CanExpand="@context.Expandable" />
+        </ItemTemplate>
+    </MudTreeView>
+</MudDrawer>
+
+<MudPaper Class="pa-16 ma-2">
+    <div class="d-flex justify-center align-center mud-height-full">
+        Home
+    </div>
+</MudPaper>
+
+@code
+{
+    private List<TreeItemData<string>> InitialTreeItems { get; set; } = new();
+    private bool _open = false;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        globalEventHandler.OnServicebusConnected += OnServicebusConnected;
+    }
+
+    private void OnServicebusConnected(NexusExplorerEventArgs args)
+    {
+        var servicebusNode = new TreeItemData<string> { Value = $"namespace-{args.Value}", Text = args.Value, Icon = Icons.Material.Filled.Link, Expandable = true };
+        _open = true;
+        InitialTreeItems.Add(servicebusNode);
+        StateHasChanged();
+    }
+
+    public async Task<IReadOnlyCollection<TreeItemData<string>>> LoadServerData(string parentValue)
+    {
+        var children = new List<TreeItemData<string>>();
+        if (parentValue.StartsWith("namespace"))
+        {
+            var queues = servicebusAdminService.GetQueues();
+            var topics = servicebusAdminService.GetTopics();
+            foreach (var queue in queues.Content)
+            {
+                children.Add(new TreeItemData<string> { Value = $"queue-{queue.Name}", Text = queue.Name, Icon = Icons.Material.Filled.Queue, Expandable = false });
+            }
+
+            foreach (var topic in topics.Content)
+            {
+                children.Add(new TreeItemData<string> { Value = $"topic-{topic.Name}", Text = topic.Name, Icon = Icons.Material.Filled.Topic, Expandable = true });
+            }
+            return children;
+        }
+        else if (parentValue.StartsWith("topic"))
+        {
+            var topicName = string.Join('-',parentValue.Split('-').Skip(1));
+            var subscriptions = servicebusAdminService.GetTopicSubscriptions(topicName);
+            foreach (var subscription in subscriptions.Content)
+            {
+                children.Add(new TreeItemData<string> { Value = $"subscription-{subscription.Name}", Text = subscription.Name, Icon = Icons.Material.Filled.Subscriptions, Expandable = false });
+            }
+        }
+        return children;
+    }
+}

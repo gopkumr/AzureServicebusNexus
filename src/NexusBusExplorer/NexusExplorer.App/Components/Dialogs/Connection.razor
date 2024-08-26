@@ -1,0 +1,31 @@
+﻿@page "/connection"
+@using NexusExplorer.Domain.Services.Abstractions
+
+@inject IServicebusAdminService servicebusAdminService
+
+<MudDialog>
+    <DialogContent>
+        <MudTextField T="string" @bind-Value="@tenantId" Label="TenantId"></MudTextField>
+        <MudTextField T="string" @bind-Value="@servicebusNamespaceName" Label="Servicebus Namespace Name"></MudTextField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    private string servicebusNamespaceName{ get; set; }
+    private string tenantId { get; set; }
+
+    private async Task Submit() {
+        var namespaceValue = await servicebusAdminService.Connect(servicebusNamespaceName, new Domain.Models.NexusAuthenticationOptions{ TenantId = tenantId});
+        if (namespaceValue != null && namespaceValue.Content !=null)
+            MudDialog.Close(namespaceValue.Content.Name);
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+}

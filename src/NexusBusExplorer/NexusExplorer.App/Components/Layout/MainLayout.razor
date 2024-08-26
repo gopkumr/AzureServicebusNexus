@@ -1,0 +1,52 @@
+﻿@using System.Text.Json
+@using Microsoft.JSInterop
+@using NexusExplorer.App.Services
+
+@inject IDialogService DialogService
+@inject IJSRuntime JSRuntime
+@inject INexusExplorerEvents globalEventHandler
+
+@inherits LayoutComponentBase
+
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudText Typo="Typo.h5" Class="ml-3">Nexus Bus Explorer</MudText>
+        <MudSpacer />
+        <MudToggleIconButton @bind-Toggled="_connectedToBus"
+                             Icon="@Icons.Material.Filled.LinkOff" Color="@Color.Error" title=@(_connectedToBus ? "On" : "Off")
+                             ToggledIcon="@Icons.Material.Filled.Link" ToggledColor="@Color.Success"
+                             @onclick="OpenDialogAsync" />
+
+        <span>@(_connectedToBus ? $"Connected to {_servicebusName}" : "Not Connected")</span>
+    </MudAppBar>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+
+</MudLayout>
+@code {
+    bool _connectedToBus = false;
+    string _servicebusName = string.Empty;
+
+    private async Task OpenDialogAsync()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true, FullWidth = true };
+
+        var dialogResponse = await DialogService.ShowAsync<NexusExplorer.App.Components.Dialogs.Connection>("Connect to service bus", options);
+        var result = await dialogResponse.Result;
+
+        if (!result?.Canceled ?? false)
+        {
+            _connectedToBus = true;
+            _servicebusName = result?.Data?.ToString() ?? "unknown";
+
+            globalEventHandler.OnServicebusConnected?.Invoke(new ViewModels.NexusExplorerEventArgs { Value=_servicebusName, Sender = "Layout" });
+        }
+    }
+}

@@ -5,6 +5,7 @@ using NexusExplorer.Domain.Services.Abstractions;
 using NexusExplorer.AzureServiceBus.Implementations;
 using NexusExplorer.App.Services;
 using NexusExplorerEvents = NexusExplorer.App.Services.NexusExplorerEvents;
+using NexusExplorer.Mediator;
 
 namespace NexusExplorer.App
 {
@@ -22,6 +23,7 @@ namespace NexusExplorer.App
 
             builder.Services.AddSingleton<IServicebusAdminService, ServicebusAdminService>();
             builder.Services.AddSingleton<INexusExplorerEvents, NexusExplorerEvents>();
+            builder.Services.RegisterNexusMediatorDependency();
 
             builder.Services.AddMudServices();
             builder.Services.AddMauiBlazorWebView();

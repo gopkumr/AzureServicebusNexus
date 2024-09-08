@@ -68,6 +68,7 @@
     <ItemGroup>
       <ProjectReference Include="..\NexusExplorer.AzureServiceBus\NexusExplorer.AzureServiceBus.csproj" />
       <ProjectReference Include="..\NexusExplorer.Domain\NexusExplorer.Domain.csproj" />
+      <ProjectReference Include="..\NexusExplorer.Mediator\NexusExplorer.Mediator.csproj" />
     </ItemGroup>
 
     <ItemGroup>

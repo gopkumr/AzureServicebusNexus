@@ -2,9 +2,11 @@
 @using NexusExplorer.App.ViewModels
 @using NexusExplorer.Domain.Services.Abstractions
 @using NexusExplorer.App.Services;
+@using NexusExplorer.Mediator;
 
 @inject IServicebusAdminService servicebusAdminService
 @inject INexusExplorerEvents globalEventHandler
+@inject NexusExplorerMediator mediator
 
 
 <MudDrawer @bind-Open="@_open" Elevation="0" Variant="@DrawerVariant.Persistent" ClipMode="@DrawerClipMode.Docked">
